@@ -3,10 +3,11 @@ import PackingList from './PackingList';
 import Form from './Form';
 import Logo from './Logo';
 import { useItem } from '../hooks/useItem';
+import { useEffect } from 'react';
 
 export default function App() {
 	// const [items, setItems] = useState([]);
-	const [items,setItems]=useItem([]);
+	const [items, setItems] = useItem([]);
 
 	function handleAddItems(item) {
 		setItems((items) => [...items, item]);
@@ -27,8 +28,17 @@ export default function App() {
 		);
 		if (confirmed) setItems([]);
 	}
+	useEffect(() => {
+		document.title = 'Far Away';
+		const link = document.createElement('link');
+		link.rel = 'icon';
+		link.href = 'favicon.ico';
 
-	
+		return () => {
+			document.title = 'Far Away';
+		};
+	}, []);
+
 	return (
 		<div className='app'>
 			<Logo />
